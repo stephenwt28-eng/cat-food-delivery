@@ -1,0 +1,159 @@
+h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.home-button {
+  margin-bottom: 1.2rem;
+}
+
+.order-confirm p {
+  margin-bottom: 1.25rem;
+}
+
+.order-summary {
+  margin-bottom: 2rem;
+}
+
+.action-links {
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.review-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-box p {
+  margin-bottom: 1.5rem;
+}
+
+.hero-box .order-summary {
+  margin-bottom: 2rem;
+}
+
+.hero-box .action-links {
+  margin-top: 2rem;
+}
+
+.order-confirm {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--color-text);
+}
+
+.order-summary {
+  background: var(--color-surface-soft);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2rem;
+}
+
+.order-summary h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+/* Line items within order summary */
+.line-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.line-item:last-child {
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.items-summary {
+  margin-bottom: 1.5rem;
+}
+
+.items-summary > div {
+  margin-bottom: 0.75rem;
+}
+
+/* Action links container */
+.action-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-accent);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.action-link:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.action-link:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .order-confirm {
+    padding: 1.5rem 1rem;
+  }
+
+  .order-summary {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .order-summary h3 {
+    font-size: 1.25rem;
+  }
+
+  .action-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-link {
+    justify-content: center;
+  }
+
+  .line-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Ensure buttons inherit global styles if present */
+button {
+  /* Global button styles assumed in global.css */
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}

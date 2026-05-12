@@ -1,0 +1,145 @@
+.checkout-container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Catamaran', sans-serif;
+}
+
+.checkout-box {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-box h2 {
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.reviews-section {
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+}
+
+.reviews-section h2 {
+  text-align: center;
+  color: #333;
+}
+
+.review-cards {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.review-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  max-width: 300px;
+}
+
+.checkout-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+  font-family: 'Catamaran', sans-serif;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Responsive design for mobile (768px and below) */
+@media (max-width: 768px) {
+  .checkout-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .checkout-box {
+    padding: 1.5rem;
+  }
+
+  .checkout-box h2 {
+    font-size: 2rem;
+  }
+
+  .reviews-section {
+    padding: 1.5rem;
+  }
+
+  .review-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .review-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .checkout-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+.customization-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+.breakdown-item.subtotal {
+  border-top: 2px solid #e5e5e5;
+  font-weight: bold;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
