@@ -547,3 +547,16 @@
   margin: 0 auto;
 }
 
+.mockup-placeholder {
+  width: 100%;
+  min-height: clamp(260px, 45vw, 520px);
+  border: 2px dashed rgba(242, 140, 40, 0.35);
+  border-radius: calc(var(--radius-lg) - 8px);
+  background: url('../assets/cat-food-hero-whaaaat.jpg') center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-align: center;
+}

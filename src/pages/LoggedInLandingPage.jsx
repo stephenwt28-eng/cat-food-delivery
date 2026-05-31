@@ -47,10 +47,8 @@ function LoggedInLandingPage() {
             <div className="mockup-box">
               <div className="floating-badge badge-top-left">✅ Vet Approved</div>
               <div className="floating-badge badge-bottom-right">🧡 100% Natural</div>
-
               <div className="mockup-placeholder">
-                {/* Image will go here */}
-              </div>
+</div>
             </div>
           </div>
         </div>

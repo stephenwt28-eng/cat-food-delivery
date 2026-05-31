@@ -36,9 +36,8 @@ function ReturningMember() {
           <div className="hero-visual">
             <div className="mockup-box">
               <div className="floating-badge badge-top-left">✅ Vet Approved</div>
-              <div className="floating-badge badge-bottom-right">🧡 100% Natural</div>
               <div className="mockup-placeholder">
-              </div>
+</div>
             </div>
           </div>
         </div>
