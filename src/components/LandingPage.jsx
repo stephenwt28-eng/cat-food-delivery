@@ -25,7 +25,7 @@ function LandingPage() {
             <p className="hero-tagline">This time, it's PERSONAL...</p>
             <h1>FRESH CUSTOMIZABLE MEALS BUILT AROUND YOUR CAT!</h1>
             <p className="hero-text">
-              We believe every cat deserves a meal plan tailored to their unique needs. Whether your feline friend has dietary restrictions, prefers specific flavors, or needs portion control, GobsmackKitty makes it easy to build a plan that works for them—and for your lifestyle. Choose from fresh, premium ingredients, customize delivery schedules, and add supplements or treats. Your cat gets the nutrition they deserve. You get the convenience you need.
+              We believe every cat deserves a meal plan tailored to their unique needs. Whether your feline friend has dietary restrictions, prefers specific flavors, or needs portion control, RA&A Cat Food Delivery makes it easy to build a plan that works for them—and for your lifestyle. Choose from fresh, premium ingredients, customize delivery schedules, and add supplements or treats. Your cat gets the nutrition they deserve. You get the convenience you need.
             </p>
             <div className="hero-actions">
               <Link to="/login">
@@ -83,7 +83,7 @@ function LandingPage() {
         <div className="why-header">
           <h2 className="section-title">Who We Are</h2>
           <p className="hero-text">
-        Meet the founders of GobsmackKitty: our beloved cats Riley, Atticus, and Angus. These incredible felines are the heart and soul of our mission, bringing joy, inspiration, and a touch of chaos to everything we do.
+        Meet the founders of RA&A: our beloved cats Riley, Atticus, and Angus. These incredible felines are the heart and soul of our mission, bringing joy, inspiration, and a touch of chaos to everything we do.
       </p>
 
       <div className="grid grid-cols-3 gap-8">
@@ -119,7 +119,7 @@ function LandingPage() {
       <h2 className="section-title">In Loving Memory of Dora</h2>
         <img src={Dora} alt="Dora" />
         <div>
-          <p className="hero-text">Dora was the woman of the house. Ruling the roost, she bravely battled arthritis and chronic vomiting. Despite her constant pain, she remained the most gentle and well-behaved cat imaginable, never complaining or lashing out. We tried everything—medications, special diets, countless vet visits, shutting us up in separate rooms (uncool)—to ease her suffering. But at the close of May in 2025, with heavy hearts, we made the compassionate choice to let her go peacefully. Her unwavering spirit and resilience inspired the creation of GobsmackKitty, dedicated to improving the lives of cats like her.
+          <p className="hero-text">Dora was the woman of the house. Ruling the roost, she bravely battled arthritis and chronic vomiting. Despite her constant pain, she remained the most gentle and well-behaved cat imaginable, never complaining or lashing out. We tried everything—medications, special diets, countless vet visits, shutting us up in separate rooms (uncool)—to ease her suffering. But at the close of May in 2025, with heavy hearts, we made the compassionate choice to let her go peacefully. Her unwavering spirit and resilience inspired the creation of RA&A, dedicated to improving the lives of cats like her.
           </p>
         </div>
       </div>

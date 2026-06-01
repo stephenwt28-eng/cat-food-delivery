@@ -40,7 +40,7 @@ const cartLink = (isLoggedInLandingPage || isReturningMember)
     <header className="site-header">
       <div className="container navbar-content">
         <div className="brand">
-          <h1>GOBSMACKKITTY®</h1>
+          <h1>RA&A ®</h1>
         </div>
 
         <nav className="desktop-nav" aria-label="Primary">
