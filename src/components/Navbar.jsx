@@ -8,19 +8,26 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const isRestrictedRoute = ['/profile', '/login', '/signup'].includes(location.pathname);
-  const isLandingPage = location.pathname === '/';
-const isLoggedInLandingPage = location.pathname === '/logged-in-landing';
-const isReturningMember = location.pathname === '/returning-member';
-const isReviewPlanPage = location.pathname === '/review-plan';
-const isCheckoutPage = location.pathname === '/checkout';
-const isOrderConfirmPage = location.pathname === '/orderconfirm';
-const profileLink = (isLoggedInLandingPage || isReturningMember)
+  const path = location.pathname;
+const isRestrictedRoute = ['/profile', '/login', '/signup'].includes(path);
+const isLoggedInLandingPage = path === '/logged-in-landing';
+const isReturningMember = path === '/returning-member';
+const isBuildPlanPage = path === '/build-plan';
+const isReviewPlanPage = path === '/review-plan';
+const isCheckoutPage = path === '/checkout';
+const isOrderConfirmPage = path === '/orderconfirm';
+
+const cartDisabled = isRestrictedRoute || isBuildPlanPage || isReviewPlanPage || isCheckoutPage || isOrderConfirmPage;
+const profileDisabled = isRestrictedRoute || isCheckoutPage;
+
+const profileLink = (isLoggedInLandingPage || isReturningMember || isBuildPlanPage || isReviewPlanPage || isOrderConfirmPage)
   ? "/profile"
   : "/login";
-const cartLink = (isLoggedInLandingPage || isReturningMember) 
-  ? (isReturningMember ? "/review-plan" : "/build-plan")
-  : "/login";
+const cartLink = isLoggedInLandingPage
+  ? "/build-plan"
+  : isReturningMember
+    ? "/review-plan"
+    : "/login";
 
   console.log('DEBUG - isLoggedIn:', isLoggedIn, 'isReturningMember:', isReturningMember, 'cartLink:', cartLink);
 
@@ -48,7 +55,7 @@ const cartLink = (isLoggedInLandingPage || isReturningMember)
         </nav>
 
         <div className="navbar-icons">
-  {isRestrictedRoute || isReviewPlanPage || isCheckoutPage || isOrderConfirmPage ? (
+  {cartDisabled ? (
   <button className="icon-button cart-button" aria-label="Shopping cart" disabled>
     <img src={shoppingCart} alt="Cart" className="cart-icon" />
   </button>
@@ -59,7 +66,7 @@ const cartLink = (isLoggedInLandingPage || isReturningMember)
     </button>
   </Link>
 )}
-  {isRestrictedRoute || isReviewPlanPage || isCheckoutPage ? (
+{profileDisabled ? (
   <button className="icon-button user-button" aria-label="User account" disabled>
     <img src={profilePic} alt="User profile" className="profile-icon" />
   </button>

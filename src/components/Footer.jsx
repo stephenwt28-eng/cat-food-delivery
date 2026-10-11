@@ -21,13 +21,12 @@ function Footer() {
 
       <div className="footer-bottom">
         <div className="footer-bottom-left">
-          <p>&copy; 2026 GobsmackKitty LLC. All rights reserved.</p>
+          <p>&copy; 2026 RA&A. All rights reserved.</p>
           <a href="#terms">Terms & Conditions</a>
           <a href="#privacy">Privacy Policy</a>
         </div>
         <div className="footer-bottom-right">
-          <a href="#do-not-sell">DO NOT SELL OUR INFORMATION</a>
-          <p>gobbsmackkitty.com</p>
+          <a href="#do-not-sell">DO NOT SELL OUR INFORMATION.</a>
         </div>
       </div>
     </footer>

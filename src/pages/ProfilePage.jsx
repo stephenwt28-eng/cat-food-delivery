@@ -88,8 +88,6 @@ useEffect(() => {
   setPhone(savedPhone);
 }, []);
 
-  
-
 const phoneDigits = {
   '+1': 10,
   '+44': 10,
