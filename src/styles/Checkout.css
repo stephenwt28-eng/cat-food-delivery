@@ -55,32 +55,7 @@
   margin-top: 2rem;
 }
 
-.btn {
-  padding: 12px 24px;
-  border-radius: var(--radius-lg);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  font-size: 1rem;
-  font-family: 'Catamaran', sans-serif;
-}
-
-.btn-primary {
-  background: var(--color-accent);
-  color: white;
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
-}
-
-.btn-secondary:hover {
-  background: var(--color-accent);
-  color: white;
-}
+/* .btn/.btn-primary/.btn-secondary styling lives in global.css */
 
 /* Responsive design for mobile (768px and below) */
 @media (max-width: 768px) {
@@ -141,5 +116,115 @@
   font-weight: bold;
   padding-top: 1rem;
   margin-top: 0.5rem;
+}
+
+/* Form fields (matches ProfilePage.css) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-input {
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #f25e28;
+  box-shadow: 0 0 0 2px rgba(242, 94, 40, 0.2);
+}
+
+.form-input:hover {
+  border-color: #ff8d5d;
+}
+
+/* Saved cards (matches ProfilePage.css) */
+.cards-section {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.payment-card {
+  background-color: #fff;
+  border: 1px solid #e5d9d2;
+  border-radius: var(--radius-lg, 16px);
+  padding: 18px 20px;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+.payment-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.payment-card.active {
+  border-color: #f25e28;
+  background-color: #fff9f6;
+  box-shadow: 0 6px 18px rgba(242, 94, 40, 0.15);
+}
+
+.payment-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.payment-card-label {
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+.payment-card-remove {
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.payment-card-remove:hover {
+  background-color: rgba(192, 57, 43, 0.1);
+}
+
+.payment-card-fields {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  gap: 14px;
+}
+
+.payment-card-fields > .form-group {
+  min-width: 0;
+}
+
+.payment-card-fields .form-input {
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .payment-card-fields {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 

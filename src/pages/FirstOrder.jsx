@@ -5,6 +5,10 @@ import '../styles/FirstOrder.css';
 const FirstOrder = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [catName, setCatName] = useState('');
+  const [catAge, setCatAge] = useState('');
+  const [catWeight, setCatWeight] = useState('');
+  const [catAllergies, setCatAllergies] = useState('');
   const [selectedMeats, setSelectedMeats] = useState([]);
   const [selectedVeggies, setSelectedVeggies] = useState([]);
   const [selectedSupplements, setSelectedSupplements] = useState([]);
@@ -84,8 +88,12 @@ const FirstOrder = () => {
   const prevStep = () => setCurrentStep((c) => c - 1);
 
   const handleContinue = () => {
-  if (currentStep === 5) {
+  if (currentStep === 6) {
     const cart = {
+      catName: catName.trim(),
+      catAge,
+      catWeight,
+      catAllergies: catAllergies.trim(),
       meats: selectedMeats.map(idx => ({ name: meats[idx].name, price: meats[idx].price })),
       veggies: !skippedVeggies ? selectedVeggies.map(idx => ({ name: veggies[idx].name, price: veggies[idx].price })) : [],
       supplements: !skippedSupplements ? selectedSupplements.map(idx => ({ name: supplements[idx].name, price: supplements[idx].price })) : [],
@@ -93,9 +101,7 @@ const FirstOrder = () => {
       frequency: selectedFrequency ? [{ name: frequencyOptions.find(f => f.value === selectedFrequency).name, price: frequencyOptions.find(f => f.value === selectedFrequency).price }] : []
     };
     
-    console.log('Saving cart:', cart); // DEBUG LOG
     localStorage.setItem('cart', JSON.stringify(cart));
-    console.log('Cart saved. Checking:', localStorage.getItem('cart')); // DEBUG LOG
     navigate('/checkout');
   } else {
     setCurrentStep((c) => c + 1);
@@ -105,14 +111,16 @@ const FirstOrder = () => {
   const canContinue = () => {
     switch (currentStep) {
       case 1:
-        return selectedMeats.length > 0;
+        return catName.trim() !== '';
       case 2:
-        return skippedVeggies || selectedVeggies.length > 0;
+        return selectedMeats.length > 0;
       case 3:
-        return skippedSupplements || selectedSupplements.length > 0;
+        return skippedVeggies || selectedVeggies.length > 0;
       case 4:
-        return selectedContainer !== null;
+        return skippedSupplements || selectedSupplements.length > 0;
       case 5:
+        return selectedContainer !== null;
+      case 6:
         return selectedFrequency !== null;
       default:
         return false;
@@ -154,7 +162,7 @@ const FirstOrder = () => {
       <div className="firstorder-container">
         <div className="hero-box">
           <div className="progress">
-  {Array.from({ length: 5 }, (_, i) => (
+  {Array.from({ length: 6 }, (_, i) => (
     <div
       className={`progress-step ${currentStep >= i + 1 ? `progress-step-${i + 1}` : ''}`}
       key={i}
@@ -166,7 +174,67 @@ const FirstOrder = () => {
           <div className="step-content">
             {currentStep === 1 && (
               <>
-                <h2>Choose Your <span className="step-header-1">Meats</span></h2>
+                <h2>Tell Us About <span className="step-header-1">Your Cat</span></h2>
+                <div className="form-group" style={{ marginBottom: '1rem' }}>
+                  <label className="form-label">Cat's Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Dora"
+                    value={catName}
+                    onChange={(e) => setCatName(e.target.value)}
+                    className="form-input"
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+                  <div className="form-group" style={{ flex: 1 }}>
+                    <label className="form-label">Age (years)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.5"
+                      placeholder="e.g. 3"
+                      value={catAge}
+                      onChange={(e) => setCatAge(e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="form-group" style={{ flex: 1 }}>
+                    <label className="form-label">Weight (lbs)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.5"
+                      placeholder="e.g. 10"
+                      value={catWeight}
+                      onChange={(e) => setCatWeight(e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+                <div className="form-group" style={{ marginBottom: '1rem' }}>
+                  <label className="form-label">Allergies or Dietary Restrictions (optional)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. No fish, sensitive stomach"
+                    value={catAllergies}
+                    onChange={(e) => setCatAllergies(e.target.value)}
+                    className="form-input"
+                  />
+                </div>
+                <div className="buttons">
+                  <button
+                    className="btn btn-primary"
+                    disabled={!canContinue()}
+                    onClick={handleContinue}
+                  >
+                    Continue
+                  </button>
+                </div>
+              </>
+            )}
+            {currentStep === 2 && (
+              <>
+                <h2>Choose {catName ? `${catName}'s` : 'Your'} <span className="step-header-1">Meats</span></h2>
                 <div className="grid">
                   {meats.map((item, idx) => (
                     <label className={`item-card item-card-step-1`} key={idx}>
@@ -186,6 +254,9 @@ const FirstOrder = () => {
                   Live Total: ${calculateTotal().toFixed(2)}
                 </div>
                 <div className="buttons">
+                  <button className="btn btn-secondary" onClick={prevStep}>
+                    Back
+                  </button>
                   <button
                     className="btn btn-primary"
                     disabled={!canContinue()}
@@ -196,7 +267,7 @@ const FirstOrder = () => {
                 </div>
               </>
             )}
-            {currentStep === 2 && (
+            {currentStep === 3 && (
               <>
                 <h2>Choose Your <span className="step-header-2">Veggies</span></h2>
                 <div className="grid">
@@ -239,7 +310,7 @@ const FirstOrder = () => {
                 </div>
               </>
             )}
-            {currentStep === 3 && (
+            {currentStep === 4 && (
               <>
                 <h2>Add <span className="step-header-3">Supplements</span></h2>
                 <div className="grid">
@@ -282,7 +353,7 @@ const FirstOrder = () => {
                 </div>
               </>
             )}
-            {currentStep === 4 && (
+            {currentStep === 5 && (
               <>
                 <h2>Select <span className="step-header-4">Container</span></h2>
                 <div className="freq-grid">
@@ -314,7 +385,7 @@ const FirstOrder = () => {
                 </div>
               </>
             )}
-            {currentStep === 5 && (
+            {currentStep === 6 && (
               <>
                 <h2>Schedule <span className="step-header-5">Deliveries</span></h2>
                 <div className="freq-grid">

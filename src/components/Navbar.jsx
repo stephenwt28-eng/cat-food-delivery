@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import profilePic from '../assets/cat_food_delivery_profilepic.png';
 import shoppingCart from '../assets/shopping-cart.png';
 import '../styles/Navbar.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { clearSession } from '../utils/auth';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const path = location.pathname;
 const isRestrictedRoute = ['/profile', '/login', '/signup'].includes(path);
 const isLoggedInLandingPage = path === '/logged-in-landing';
@@ -29,8 +31,6 @@ const cartLink = isLoggedInLandingPage
     ? "/review-plan"
     : "/login";
 
-  console.log('DEBUG - isLoggedIn:', isLoggedIn, 'isReturningMember:', isReturningMember, 'cartLink:', cartLink);
-
   useEffect(() => {
   const isLoggedInStorage = localStorage.getItem('isLoggedIn') === 'true';
   const loginToken = localStorage.getItem('loginToken') === 'true';
@@ -39,9 +39,27 @@ const cartLink = isLoggedInLandingPage
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const handleLogout = () => {
+    clearSession();
+    setIsMenuOpen(false);
+    navigate('/');
+  };
+
   const menuItems = isLoggedIn
-    ? ['Home', 'Your Account', 'Your Order', 'Who We Are', 'Help', 'Log out']
-    : ['Home', 'Who We Are', 'Help', 'Sign in'];
+    ? [
+        { label: 'Home', to: '/' },
+        { label: 'Your Account', to: '/profile' },
+        { label: 'Your Order', to: '/review-plan' },
+        { label: 'Who We Are', to: '/#who-we-are' },
+        { label: 'Help', to: '/#help' },
+        { label: 'Log out', onClick: handleLogout },
+      ]
+    : [
+        { label: 'Home', to: '/' },
+        { label: 'Who We Are', to: '/#who-we-are' },
+        { label: 'Help', to: '/#help' },
+        { label: 'Sign in', to: '/login' },
+      ];
 
   return (
     <header className="site-header">
@@ -92,20 +110,20 @@ const cartLink = isLoggedInLandingPage
 
       {isMenuOpen && (
         <nav className="dropdown-menu" aria-label="Mobile menu">
-          {menuItems.map((item, index) => 
-            item === 'Sign in' ? (
-              <Link key={index} to="/login" className="menu-item" onClick={toggleMenu}>
-                Sign in
-              </Link>
-            ) : (
-              <a
-                key={index}
-                href={item === 'Home' ? '/' : `#${item.toLowerCase()}`}
+          {menuItems.map((item) =>
+            item.onClick ? (
+              <button
+                key={item.label}
+                type="button"
                 className="menu-item"
-                onClick={toggleMenu}
+                onClick={item.onClick}
               >
-                {item}
-              </a>
+                {item.label}
+              </button>
+            ) : (
+              <Link key={item.label} to={item.to} className="menu-item" onClick={toggleMenu}>
+                {item.label}
+              </Link>
             )
           )}
         </nav>

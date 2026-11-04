@@ -20,7 +20,7 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
@@ -65,7 +65,7 @@ function App() {
       <BrowserRouter>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar isLoggedIn={isLoggedIn} cartCount={cartCount} />
-          <main style={{ flex: 1, paddingTop: '70px' }}> {/* Adjust padding for fixed navbar */}
+          <main style={{ flex: 1 }}>
             <Routes>
   <Route path="/" element={<LandingPage />} />
   <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />

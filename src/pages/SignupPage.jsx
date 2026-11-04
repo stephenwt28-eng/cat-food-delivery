@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
@@ -14,16 +14,7 @@ const SignupPage = () => {
 const [city, setCity] = useState('');
 const [state, setState] = useState('');
 const [zip, setZip] = useState('');
-
-  const inputStyle = {
-    padding: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    fontSize: '16px',
-    boxSizing: 'border-box',
-    width: '100%',
-    marginBottom: '20px'
-  };
+const [addressCountry, setAddressCountry] = useState('');
 
   const handleSignup = (e) => {
   e.preventDefault();
@@ -40,6 +31,7 @@ const [zip, setZip] = useState('');
   localStorage.setItem('loginCity', city);
   localStorage.setItem('loginState', state);
   localStorage.setItem('loginZip', zip);
+  localStorage.setItem('loginAddressCountry', addressCountry);
   localStorage.setItem('isLoggedIn', 'true');
   localStorage.setItem('loginToken', 'true');
   navigate('/logged-in-landing');
@@ -83,7 +75,6 @@ const [zip, setZip] = useState('');
     '+966': 9,
     '+221': 9,
     '+27': 9,
-    '+34': 9,
     '+46': 9,
     '+41': 9,
     '+216': 8,
@@ -114,7 +105,7 @@ const isFormValid = firstName.trim() !== '' && email.trim() !== '' && password.t
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '5px 0',
+        padding: '24px 0 10px',
       }}>
         <div style={{
           maxWidth: '800px',
@@ -154,12 +145,13 @@ const isFormValid = firstName.trim() !== '' && email.trim() !== '' && password.t
         {/* Phone Section */}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>Phone Number</label>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
               <select
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 style={{
-                  flex: '0 0 100px',
+                  flex: '1 1 160px',
+                  minWidth: 0,
                   padding: '10px',
                   border: '1px solid #ccc',
                   borderRadius: '5px',
@@ -212,7 +204,8 @@ const isFormValid = firstName.trim() !== '' && email.trim() !== '' && password.t
                 onChange={(e) => setPhone(e.target.value)}
                 onBlur={validatePhone}
                 style={{
-                  flex: 1,
+                  flex: '1 1 140px',
+                  minWidth: 0,
                   padding: '10px',
                   border: '1px solid #ccc',
                   borderRadius: '5px',
@@ -222,47 +215,46 @@ const isFormValid = firstName.trim() !== '' && email.trim() !== '' && password.t
             </div>
           </div>
 
-          {/* First Name */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>First Name</label>
-            <input
-              type="text"
-              placeholder="Enter your first name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-              }}
-            />
+          {/* First Name / Last Name */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '8px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>First Name</label>
+              <input
+                type="text"
+                placeholder="Enter your first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>Last Name</label>
+              <input
+                type="text"
+                placeholder="Enter your last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
           </div>
-
-           {/* Last Name */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Last Name</label>
-            <input
-              type="text"
-              placeholder="Enter your last name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-              }}
-            />
-            <p style={{ fontSize: '12px', color: '#666', marginTop: '5px', fontStyle: 'italic' }}>
-              *DEVELOPER'S NOTE: Feel free to leave this blank and enter your cat's name (or some other random cat name) instead of your first!
-            </p>
-          </div>
-
+          <p style={{ fontSize: '12px', color: '#666', marginTop: '0', marginBottom: '20px', fontStyle: 'italic' }}>
+            *DEVELOPER'S NOTE: Feel free to leave this blank and enter your cat's name (or some other random cat name) instead of your first!
+          </p>
 
           {/* Email */}
           <div style={{ marginBottom: '20px' }}>
@@ -283,118 +275,136 @@ const isFormValid = firstName.trim() !== '' && email.trim() !== '' && password.t
             />
           </div>
 
-          {/* Password */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
-
-          {/* Confirm Password */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '5px' }}>Confirm Password</label>
-            <input
-              type="password"
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                fontSize: '16px',
-                boxSizing: 'border-box',
-              }}
-            />
+          {/* Password / Confirm Password */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>Password</label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>Confirm Password</label>
+              <input
+                type="password"
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
           </div>
 
           {/* Address */}
-<div style={{ marginBottom: '20px' }}>
-  <label style={{ display: 'block', marginBottom: '5px' }}>Address</label>
-  <input
-    type="text"
-    placeholder="Enter your address"
-    value={address}
-    onChange={(e) => setAddress(e.target.value)}
-    style={{
-      width: '100%',
-      padding: '10px',
-      border: '1px solid #ccc',
-      borderRadius: '5px',
-      fontSize: '16px',
-      boxSizing: 'border-box',
-    }}
-  />
-</div>
-              {/* City */}
-<div style={{ marginBottom: '20px' }}>
-  <label style={{ display: 'block', marginBottom: '5px' }}>City</label>
-  <input
-    type="text"
-    placeholder="Enter your city"
-    value={city}
-    onChange={(e) => setCity(e.target.value)}
-    style={{
-      width: '100%',
-      padding: '10px',
-      border: '1px solid #ccc',
-      borderRadius: '5px',
-      fontSize: '16px',
-      boxSizing: 'border-box',
-    }}
-  />
-</div>
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Address</label>
+            <input
+              type="text"
+              placeholder="Enter your address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                fontSize: '16px',
+                boxSizing: 'border-box',
+              }}
+            />
+          </div>
 
-{/* State */}
-<div style={{ marginBottom: '20px' }}>
-  <label style={{ display: 'block', marginBottom: '5px' }}>State</label>
-  <input
-    type="text"
-    placeholder="Enter your state"
-    value={state}
-    onChange={(e) => setState(e.target.value)}
-    style={{
-      width: '100%',
-      padding: '10px',
-      border: '1px solid #ccc',
-      borderRadius: '5px',
-      fontSize: '16px',
-      boxSizing: 'border-box',
-    }}
-  />
-</div>
+          {/* City / State / Zip */}
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+            <div style={{ flex: 2 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>City</label>
+              <input
+                type="text"
+                placeholder="Enter your city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>State</label>
+              <input
+                type="text"
+                placeholder="State"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '5px' }}>Zip</label>
+              <input
+                type="text"
+                placeholder="Zip code"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  border: '1px solid #ccc',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  boxSizing: 'border-box',
+                }}
+              />
+            </div>
+          </div>
 
-{/* Zip */}
-<div style={{ marginBottom: '20px' }}>
-  <label style={{ display: 'block', marginBottom: '5px' }}>Zip</label>
-  <input
-    type="text"
-    placeholder="Enter your zip code"
-    value={zip}
-    onChange={(e) => setZip(e.target.value)}
-    style={{
-      width: '100%',
-      padding: '10px',
-      border: '1px solid #ccc',
-      borderRadius: '5px',
-      fontSize: '16px',
-      boxSizing: 'border-box',
-    }}
-  />
-</div>
+          {/* Country */}
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '5px' }}>Country</label>
+            <input
+              type="text"
+              placeholder="Enter your country"
+              value={addressCountry}
+              onChange={(e) => setAddressCountry(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                fontSize: '16px',
+                boxSizing: 'border-box',
+              }}
+            />
+          </div>
 
           {/* Sign Up Button */}
           <button

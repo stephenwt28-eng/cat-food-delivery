@@ -14,65 +14,26 @@ li {
   list-style: none;
 }
 
-.btn:hover,
-.btn:focus-visible,
-.btn:active {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(242, 140, 40, 0.25);
-}
-
-.btn:disabled {
-  background-color: transparent;
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  cursor: not-allowed;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.btn:disabled:hover,
-.btn:disabled:focus-visible,
-.btn:disabled:active {
-  background-color: transparent;
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: none;
-  transform: none;
-}
-
-.btn-primary:disabled {
-  background-color: #E8D4C4;
-  border-color: #E8D4C4;
-  color: #999999;
-}
-
-.btn-secondary:disabled {
-  background-color: #E8D4C4;
-  border-color: #E8D4C4;
-  color: #999999;
-}
+/* .btn:disabled styling lives in global.css */
 
 .firstorder-container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   font-family: 'Catamaran', sans-serif;
 }
 .hero-box {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  padding: 2.5rem;
+  padding: 2rem;
   margin: 0 auto;
 }
 .progress {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   position: relative;
   max-width: 400px;
   margin-left: auto;
@@ -110,27 +71,27 @@ li {
 }
 .step-content h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   color: #333;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 .step-content h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: #333;
-  font-size: 3rem;
+  font-size: 2.25rem;
 }
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .item-card {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.85rem;
+  padding: 1.15rem;
   border: 2px solid #f0f0f0;
   border-radius: calc(var(--radius-lg) * 0.5);
   cursor: pointer;
@@ -146,7 +107,7 @@ li {
   font-weight: 600;
 }
 .emoji {
-  font-size: 2rem;
+  font-size: 1.75rem;
   flex-shrink: 0;
 }
 .item-details {
@@ -208,11 +169,11 @@ li {
 .freq-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .freq-btn {
-  padding: 1.5rem 1rem;
+  padding: 1.15rem;
   border: 2px solid #e0e0e0;
   background: white;
   border-radius: var(--radius-lg);
@@ -231,10 +192,10 @@ li {
 }
 .total-display {
   text-align: center;
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: #f8f9fa;
   border-radius: var(--radius-lg);
-  margin: 2rem 0;
+  margin: 1.25rem 0;
   font-size: 1.4rem;
   font-weight: bold;
   color: var(--color-accent);
@@ -244,6 +205,10 @@ li {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+.buttons .btn {
+  min-height: 52px;
+  padding: 0.85rem 2.25rem;
 }
 @media (max-width: 768px) {
   .grid, .freq-grid {
@@ -255,13 +220,13 @@ li {
 }
 
 .progress-step {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   background-color: #e0e0e0;
   color: #000000;

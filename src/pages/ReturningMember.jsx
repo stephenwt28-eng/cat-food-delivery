@@ -36,6 +36,7 @@ function ReturningMember() {
           <div className="hero-visual">
             <div className="mockup-box">
               <div className="floating-badge badge-top-left">✅ Vet Approved</div>
+              <div className="floating-badge badge-bottom-right">🧡 100% Natural</div>
               <div className="mockup-placeholder">
 </div>
             </div>
@@ -95,7 +96,7 @@ function ReturningMember() {
                   </div>
             
                   <div className="card cat-card">
-                    <img src={Atticus} alt="Atticus" className="cat-image" />
+                    <img src={Atticus} alt="Atticus" className="cat-image cat-image-atticus" />
                     <h3 className="card-title">ATTICUS</h3>
                     <p className="card-description">
                       The wise and gentle soul, always observing with quiet intelligence and offering comfort to all.

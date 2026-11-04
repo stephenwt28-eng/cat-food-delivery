@@ -83,7 +83,6 @@ const LoginPage = () => {
   localStorage.setItem('loginEmail', email);
   localStorage.setItem('loginPhone', phone);
   localStorage.setItem('loginCountry', country);
-  console.log('Login successful');
   navigate('/logged-in-landing');
 };
 
@@ -96,7 +95,7 @@ const LoginPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '5px 0',
+        padding: '24px 0 10px',
       }}>
         <div style={{
           maxWidth: '800px',
@@ -136,12 +135,13 @@ const LoginPage = () => {
           {/* Phone Section */}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '5px' }}>Phone Number</label>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
               <select
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 style={{
-                  flex: '0 0 100px',
+                  flex: '1 1 160px',
+                  minWidth: 0,
                   padding: '10px',
                   border: '1px solid #ccc',
                   borderRadius: '5px',
@@ -194,7 +194,8 @@ const LoginPage = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 onBlur={validatePhone}
                 style={{
-                  flex: 1,
+                  flex: '1 1 140px',
+                  minWidth: 0,
                   padding: '10px',
                   border: '1px solid #ccc',
                   borderRadius: '5px',

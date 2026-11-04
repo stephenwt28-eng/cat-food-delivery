@@ -6,7 +6,6 @@ import Riley from '../assets/11064865-246E-4581-A7E5-5A117E5E3E86_1_105_c.jpeg';
 import Atticus from '../assets/33275040-ED26-4EA2-B7EC-3A1F96DBDBC5_1_102_o.jpeg';
 import Angus from '../assets/31EAC3F1-2D7A-4222-B337-3FCE1FD5605C_1_105_c.jpeg';
 import Dora from '../assets/FB14D151-0DC0-46F0-A961-29EE1E0ED9DB_1_105_c.jpeg';
-import heroImage from '../assets/cat-food-hero-whaaaat.jpg';
 import { Link } from 'react-router-dom';
 
 const handleScrollToWhySection = () => {
@@ -97,7 +96,7 @@ function LandingPage() {
       </div>
 
       <div className="card cat-card">
-        <img src={Atticus} alt="Atticus" className="cat-image" />
+        <img src={Atticus} alt="Atticus" className="cat-image cat-image-atticus" />
         <h3 className="card-title">ATTICUS</h3>
         <p className="card-description">
           The wise and gentle soul, always observing with quiet intelligence and offering comfort to all.

@@ -92,14 +92,6 @@ const ReviewPlan = () => {
 
   const prevStep = () => setCurrentStep((c) => c - 1);
 
-  const handleProceedCheckout = () => {
-  localStorage.setItem('loginAddress', localStorage.getItem('loginAddress') || '');
-  localStorage.setItem('loginCity', localStorage.getItem('loginCity') || '');
-  localStorage.setItem('loginState', localStorage.getItem('loginState') || '');
-  localStorage.setItem('loginZip', localStorage.getItem('loginZip') || '');
-  window.location.href = '/checkout';
-};
-  
   const navigate = useNavigate();
 
   const handleContinue = () => {

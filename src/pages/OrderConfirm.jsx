@@ -67,9 +67,9 @@ const OrderConfirm = () => {
 >
           Home
         </button>
-        <h2>Plan Confirmed!</h2>
+        <h2>{cart.catName ? `${cart.catName}'s Plan is Confirmed!` : 'Plan Confirmed!'}</h2>
         <p>
-          Hooray, sorted! This is the beginning of something beautiful, for your cat's new favorite meal is on its way!
+          Hooray, sorted! This is the beginning of something beautiful, for {cart.catName || "your cat"}'s new favorite meal is on its way!
           We have confirmed your subscription and can't wait to delight your furry friend!
         </p>
         <div className="order-summary">

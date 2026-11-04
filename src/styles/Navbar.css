@@ -73,15 +73,15 @@
 }
 
 .cart-icon {
-  width: 69px;
-  height: 69px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
 
 .profile-icon {
-  width: 69px;
-  height: 69px;
+  width: 44px;
+  height: 44px;
   object-fit: cover;
   border-radius: 50%;
   display: block;
@@ -147,6 +147,18 @@
   background-color: var(--color-surface-soft);
 }
 
+button.menu-item {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  width: 100%;
+  text-align: left;
+}
+
+button.menu-item:last-child {
+  border-bottom: none;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -181,8 +193,8 @@
 
   .cart-icon,
   .profile-icon {
-    width: 69px;
-    height: 69px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -208,8 +220,8 @@
 
   .cart-icon,
   .profile-icon {
-    width: 69px;
-    height: 69px;
+    width: 36px;
+    height: 36px;
   }
 
   .menu-item {

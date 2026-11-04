@@ -106,7 +106,7 @@ function LoggedInLandingPage() {
             </div>
       
             <div className="card cat-card">
-              <img src={Atticus} alt="Atticus" className="cat-image" />
+              <img src={Atticus} alt="Atticus" className="cat-image cat-image-atticus" />
               <h3 className="card-title">ATTICUS</h3>
               <p className="card-description">
                 The wise and gentle soul, always observing with quiet intelligence and offering comfort to all.

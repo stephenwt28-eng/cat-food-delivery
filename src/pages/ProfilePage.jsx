@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ProfilePage.css';
 import profilePic from '../assets/cat_food_delivery_profilepic-v2.png';
+import { clearSession } from '../utils/auth';
 
 
 const ProfilePage = () => {
@@ -18,17 +19,15 @@ const [profileData, setProfileData] = useState(() => ({
   city: localStorage.getItem('loginCity') || '',
   state: localStorage.getItem('loginState') || '',
   zip: localStorage.getItem('loginZip') || '',
+  addressCountry: localStorage.getItem('loginAddressCountry') || '',
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',
   profilePicture: null,
 }));
-const [country, setCountry] = useState('+1');
-const [phone, setPhone] = useState('');
 const [cards, setCards] = useState([]);
 const [activeCard, setActiveCard] = useState(null);
 const [errors, setErrors] = useState({});
-const [showWarning, setShowWarning] = useState(false);
 const fileInputRef = useRef(null);
 const navigate = useNavigate();
 const handleBack = () => {
@@ -40,53 +39,10 @@ const handleBack = () => {
   }
 };
 
-const handleLogout = () => navigate('/');
-
-useEffect(() => {
-  const savedFirstName = localStorage.getItem('loginFirstName') || '';
-  const savedLastName = localStorage.getItem('loginLastName') || '';
-  const savedEmail = localStorage.getItem('loginEmail') || '';
-  const savedPhone = localStorage.getItem('loginPhone') || '';
-  const savedCountry = localStorage.getItem('loginCountry') || '+1';
-
-setProfileData(prev => ({
-    ...prev,
-    firstName: savedFirstName,
-    lastName: savedLastName,
-    email: savedEmail,
-    phone: savedPhone,
-    country: savedCountry,
-  }));
-  setCountry(savedCountry);
-  setPhone(savedPhone);
-}, []);
-
-useEffect(() => {
-  const savedFirstName = localStorage.getItem('loginFirstName') || '';
-  const savedLastName = localStorage.getItem('loginLastName') || '';
-  const savedEmail = localStorage.getItem('loginEmail') || '';
-  const savedPhone = localStorage.getItem('loginPhone') || '';
-  const savedCountry = localStorage.getItem('loginCountry') || '+1';
-  const savedAddress = localStorage.getItem('loginAddress') || '';
-  const savedCity = localStorage.getItem('loginCity') || '';
-  const savedState = localStorage.getItem('loginState') || '';
-  const savedZip = localStorage.getItem('loginZip') || '';
-
-  setProfileData(prev => ({
-    ...prev,
-    firstName: savedFirstName,
-    lastName: savedLastName,
-    email: savedEmail,
-    phone: savedPhone,
-    country: savedCountry,
-    address: savedAddress,
-    city: savedCity,
-    state: savedState,
-    zip: savedZip,
-  }));
-  setCountry(savedCountry);
-  setPhone(savedPhone);
-}, []);
+const handleLogout = () => {
+  clearSession();
+  navigate('/');
+};
 
 const phoneDigits = {
   '+1': 10,
@@ -191,10 +147,10 @@ const validateForm = () => {
  if (!profileData.email) newErrors.email = 'Email is required';
  else if (!/\S+@\S+\.\S+/.test(profileData.email)) newErrors.email = 'Email is invalid';
   // Phone validation with country-based digit check
- if (!phone.trim()) newErrors.phone = 'Phone number is required';
+ if (!profileData.phone.trim()) newErrors.phone = 'Phone number is required';
  else {
-   const digitsOnly = phone.replace(/\D/g, '');
-   const expectedDigits = phoneDigits[country] || 10;
+   const digitsOnly = profileData.phone.replace(/\D/g, '');
+   const expectedDigits = phoneDigits[profileData.country] || 10;
    if (digitsOnly.length !== expectedDigits) {
      newErrors.phone = `Phone number must be exactly ${expectedDigits} digits`;
    }
@@ -203,6 +159,7 @@ const validateForm = () => {
  if (!profileData.city) newErrors.city = 'City is required';
  if (!profileData.state) newErrors.state = 'State is required';
  if (!profileData.zip) newErrors.zip = 'Zip is required';
+ if (!profileData.addressCountry) newErrors.addressCountry = 'Country is required';
  if (profileData.newPassword && profileData.newPassword !== profileData.confirmPassword) {
    newErrors.confirmPassword = 'Passwords do not match';
  }
@@ -212,10 +169,10 @@ const validateForm = () => {
 
 
 const validatePhone = () => {
- const expectedDigits = phoneDigits[country] || 10;
- const digitsOnly = phone.replace(/\D/g, '');
+ const expectedDigits = phoneDigits[profileData.country] || 10;
+ const digitsOnly = profileData.phone.replace(/\D/g, '');
  if (digitsOnly.length !== expectedDigits && digitsOnly.length > 0) {
-   alert(`Phone number for ${country} must be exactly ${expectedDigits} digits. You entered ${digitsOnly.length}.`);
+   alert(`Phone number for ${profileData.country} must be exactly ${expectedDigits} digits. You entered ${digitsOnly.length}.`);
  }
 };
 
@@ -239,6 +196,9 @@ const handleCancel = () => {
     setProfileData(JSON.parse(savedData));
   }
   setErrors({});
+
+  const hasPlan = localStorage.getItem('cart') || localStorage.getItem('lastOrder');
+  navigate(hasPlan ? '/returning-member' : '/logged-in-landing');
 };
 
 
@@ -286,7 +246,6 @@ return (
       <button className="back-button" onClick={handleBack}>Back</button>
       <button className="logout-button" onClick={handleLogout}>Log out</button>
     </div>
-    {showWarning && <div className="warning-banner">Warning: Please complete your profile</div>}
     <div className="profile-picture-section">
   <img
     src={profileData.profilePicture || profilePic}
@@ -344,8 +303,9 @@ return (
  <label className="form-label">Phone</label>
  <div style={{ display: 'flex', gap: '10px' }}>
    <select
-     value={country}
-     onChange={(e) => setCountry(e.target.value)}
+     name="country"
+     value={profileData.country}
+     onChange={handleInputChange}
      style={{
        flex: '0 0 90px',
        padding: '10px',
@@ -393,7 +353,7 @@ return (
      <option value="+598">+598 (Uruguay 🇺🇾)</option>
      <option value="+998">+998 (Uzbekistan 🇺🇿)</option>
    </select>
-   <input type="tel" placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} onBlur={validatePhone} style={{ flex: 1, padding: '10px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px' }} />
+   <input type="tel" name="phone" placeholder="Phone number" value={profileData.phone} onChange={handleInputChange} onBlur={validatePhone} style={{ flex: 1, padding: '10px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px' }} />
  </div>
  {errors.phone && <span className="error">{errors.phone}</span>}
 </div>
@@ -423,7 +383,13 @@ return (
  <input type="text" name="zip" value={profileData.zip} onChange={handleInputChange} className="form-input" />
  {errors.zip && <span className="error">{errors.zip}</span>}
 </div>
-    
+
+      <div className="form-group" style={{ gridColumn: 'span 1' }}>
+ <label className="form-label">Country</label>
+ <input type="text" name="addressCountry" value={profileData.addressCountry} onChange={handleInputChange} className="form-input" />
+ {errors.addressCountry && <span className="error">{errors.addressCountry}</span>}
+</div>
+
       {/* Password Row */}
 <div className="form-group" style={{ gridColumn: 'span 1' }}>
  <label className="form-label">Current Password</label>
@@ -445,7 +411,7 @@ return (
     
       {/* Cards section heading - ABOVE the Add/Save buttons */}
 <div style={{ gridColumn: '1 / -1' }}>
-  <h3>Cards</h3>
+  <h3 className="cards-heading">Saved Cards</h3>
 </div>
 
 {/* Add Card and Save Cards - left aligned */}
@@ -455,14 +421,38 @@ return (
 </div>
 
 {/* Cards section - the actual cards render here */}
-<div className="cards-section" style={{ gridColumn: '1 / -1', flexDirection: 'column', gap: '15px' }}>
-  {cards.map(card => (
-    <div key={card.id} className={`card ${activeCard === card.id ? 'active' : ''}`} onClick={() => selectCard(card.id)}>
-      <input type="text" placeholder="Card Number" value={card.number} onChange={(e) => updateCard(card.id, 'number', e.target.value)} className="form-input" />
-      <input type="text" placeholder="Expiry" value={card.expiry} onChange={(e) => updateCard(card.id, 'expiry', e.target.value)} className="form-input" />
-      <input type="text" placeholder="CVV" value={card.cvv} onChange={(e) => updateCard(card.id, 'cvv', e.target.value)} className="form-input" />
-      <input type="text" placeholder="Name" value={card.name} onChange={(e) => updateCard(card.id, 'name', e.target.value)} className="form-input" />
-      <button onClick={() => removeCard(card.id)} className="btn btn-secondary">Remove</button>
+<div className="cards-section" style={{ gridColumn: '1 / -1' }}>
+  {cards.length === 0 && <p className="cards-empty">No saved cards yet — click "Add Card" to save one.</p>}
+  {cards.map((card, index) => (
+    <div key={card.id} className={`payment-card ${activeCard === card.id ? 'active' : ''}`} onClick={() => selectCard(card.id)}>
+      <div className="payment-card-header">
+        <span className="payment-card-label">💳 Card {index + 1}</span>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); removeCard(card.id); }}
+          className="payment-card-remove"
+        >
+          Remove
+        </button>
+      </div>
+      <div className="payment-card-fields">
+        <div className="form-group">
+          <label className="form-label">Card Number</label>
+          <input type="text" placeholder="1234 5678 9012 3456" value={card.number} onChange={(e) => updateCard(card.id, 'number', e.target.value)} className="form-input" />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Expiry</label>
+          <input type="text" placeholder="MM/YY" value={card.expiry} onChange={(e) => updateCard(card.id, 'expiry', e.target.value)} className="form-input" />
+        </div>
+        <div className="form-group">
+          <label className="form-label">CVV</label>
+          <input type="text" placeholder="123" value={card.cvv} onChange={(e) => updateCard(card.id, 'cvv', e.target.value)} className="form-input" />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Name on Card</label>
+          <input type="text" placeholder="Jane Doe" value={card.name} onChange={(e) => updateCard(card.id, 'name', e.target.value)} className="form-input" />
+        </div>
+      </div>
     </div>
   ))}
 </div>
