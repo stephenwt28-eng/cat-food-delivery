@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import profilePic from '../assets/cat_food_delivery_profilepic.png';
 import shoppingCart from '../assets/shopping-cart.png';
 import '../styles/Navbar.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { clearSession } from '../utils/auth';
+import { useAuth } from '../hooks/useAuth';
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,12 +31,6 @@ const cartLink = isLoggedInLandingPage
   : isReturningMember
     ? "/review-plan"
     : "/login";
-
-  useEffect(() => {
-  const isLoggedInStorage = localStorage.getItem('isLoggedIn') === 'true';
-  const loginToken = localStorage.getItem('loginToken') === 'true';
-  setIsLoggedIn(isLoggedInStorage || loginToken);
-}, [location.key]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

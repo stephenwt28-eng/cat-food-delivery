@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LandingPage from './components/LandingPage';
@@ -37,38 +37,21 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// Protected Route Component (placeholder for future use)
-const ProtectedRoute = ({ children, isLoggedIn }) => {
-  return isLoggedIn ? children : <Navigate to="/login" />;
-};
-
 // NotFound Component (simple 404)
 const NotFound = () => {
   return <h1>404 - Page Not Found</h1>;
 };
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-
-  // Example useEffect for state management (can be expanded later)
-  useEffect(() => {
-    // Simulate checking login status or cart from localStorage
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
-    const count = parseInt(localStorage.getItem('cartCount') || '0');
-    setCartCount(count);
-  }, []);
-
   return (
     <ErrorBoundary>
       <BrowserRouter>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Navbar isLoggedIn={isLoggedIn} cartCount={cartCount} />
+          <Navbar />
           <main style={{ flex: 1 }}>
             <Routes>
   <Route path="/" element={<LandingPage />} />
-  <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+  <Route path="/login" element={<LoginPage />} />
   <Route path="/signup" element={<SignupPage />} />
   <Route path="/logged-in-landing" element={<LoggedInLandingPage />} />
   <Route path="/profile" element={<ProfilePage />} />

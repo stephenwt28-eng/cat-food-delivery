@@ -19,7 +19,7 @@ const [profileData, setProfileData] = useState(() => ({
   city: localStorage.getItem('loginCity') || '',
   state: localStorage.getItem('loginState') || '',
   zip: localStorage.getItem('loginZip') || '',
-  addressCountry: localStorage.getItem('loginAddressCountry') || '',
+  addressCountry: localStorage.getItem('loginAddressCountry') || 'United States',
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',
@@ -386,7 +386,47 @@ return (
 
       <div className="form-group" style={{ gridColumn: 'span 1' }}>
  <label className="form-label">Country</label>
- <input type="text" name="addressCountry" value={profileData.addressCountry} onChange={handleInputChange} className="form-input" />
+ <select name="addressCountry" value={profileData.addressCountry} onChange={handleInputChange} className="form-input">
+   <option value="United States">🇺🇸 United States</option>
+   <option value="Canada">🇨🇦 Canada</option>
+   <option value="United Kingdom">🇬🇧 United Kingdom</option>
+   <option value="Algeria">🇩🇿 Algeria</option>
+   <option value="Argentina">🇦🇷 Argentina</option>
+   <option value="Australia">🇦🇺 Australia</option>
+   <option value="Austria">🇦🇹 Austria</option>
+   <option value="Belgium">🇧🇪 Belgium</option>
+   <option value="Brazil">🇧🇷 Brazil</option>
+   <option value="Bosnia & Herzegovina">🇧🇦 Bosnia & Herzegovina</option>
+   <option value="Cabo Verde">🇨🇻 Cabo Verde</option>
+   <option value="Colombia">🇨🇴 Colombia</option>
+   <option value="Croatia">🇭🇷 Croatia</option>
+   <option value="Curaçao">🇨🇼 Curaçao</option>
+   <option value="Czech Republic">🇨🇿 Czech Republic</option>
+   <option value="DR Congo">🇨🇩 DR Congo</option>
+   <option value="Ecuador">🇪🇨 Ecuador</option>
+   <option value="Egypt">🇪🇬 Egypt</option>
+   <option value="France">🇫🇷 France</option>
+   <option value="Germany">🇩🇪 Germany</option>
+   <option value="Haiti">🇭🇹 Haiti</option>
+   <option value="Iran">🇮🇷 Iran</option>
+   <option value="Iraq">🇮🇶 Iraq</option>
+   <option value="Italy">🇮🇹 Italy</option>
+   <option value="Ivory Coast">🇨🇮 Ivory Coast</option>
+   <option value="Japan">🇯🇵 Japan</option>
+   <option value="Korea Republic">🇰🇷 Korea Republic</option>
+   <option value="Mexico">🇲🇽 Mexico</option>
+   <option value="Norway">🇳🇴 Norway</option>
+   <option value="Panama">🇵🇦 Panama</option>
+   <option value="Portugal">🇵🇹 Portugal</option>
+   <option value="Saudi Arabia">🇸🇦 Saudi Arabia</option>
+   <option value="South Africa">🇿🇦 South Africa</option>
+   <option value="Spain">🇪🇸 Spain</option>
+   <option value="Sweden">🇸🇪 Sweden</option>
+   <option value="Switzerland">🇨🇭 Switzerland</option>
+   <option value="Turkey">🇹🇷 Turkey</option>
+   <option value="Uruguay">🇺🇾 Uruguay</option>
+   <option value="Uzbekistan">🇺🇿 Uzbekistan</option>
+ </select>
  {errors.addressCountry && <span className="error">{errors.addressCountry}</span>}
 </div>
 
