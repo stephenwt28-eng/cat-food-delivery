@@ -1,16 +1,57 @@
-# React + Vite
+# RA&A Cat Food Delivery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend portfolio project simulating a customizable cat food subscription service — think Chewy/Ollie, but for cats. Built with React, Vite, and React Router.
 
-Currently, two official plugins are available:
+> **This is a demo, not a real store.** There is no backend and no real payment processing. All accounts, profiles, orders, and saved cards are simulated client-side with `localStorage`. Please don't enter real personal information when trying it out.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+- **Landing page** that adapts its call-to-action based on account state (logged out / logged in / returning member with an existing plan)
+- **Signup / login** with a simulated session (no real auth backend)
+- **Build-a-plan flow**: tell us about your cat, then pick proteins, veggies, supplements, a container type, and a delivery frequency
+- **Checkout** with a delivery address and saved payment cards (again, simulated — nothing is sent anywhere)
+- **Order confirmation** and a **review/edit plan** flow for returning members
+- **Profile management**: edit account info, manage saved cards, log out (clears the simulated session)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the ESLint configuration
+- [React](https://react.dev/) 19
+- [Vite](https://vitejs.dev/) for dev server and bundling
+- [React Router](https://reactrouter.com/) for client-side routing
+- Plain CSS (no framework) — one stylesheet per page/component
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+No backend. `@supabase/supabase-js` is listed as a dependency but isn't wired up yet — it's the planned next step for real persistence (accounts, orders, payment) instead of `localStorage`.
+
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the printed local URL (usually `http://localhost:5173`).
+
+Other scripts:
+
+```bash
+npm run build    # production build to dist/
+npm run preview  # serve the production build locally
+npm run lint     # run ESLint
+```
+
+## Project structure
+
+```
+src/
+  components/   # Navbar, Footer, and the shared landing page content
+  pages/        # one file per route (Login, Signup, build-a-plan, Checkout, Profile, etc.)
+  styles/       # one CSS file per page/component
+  hooks/        # shared hooks (e.g. useAuth)
+  utils/        # shared helpers (e.g. session clearing on logout)
+```
+
+## Known limitations
+
+- No real backend — refreshing `localStorage` (or clearing site data) resets everything
+- No real payment processing or input encryption — this is strictly a UI/UX demo
+- Single currency, no real shipping/tax calculation

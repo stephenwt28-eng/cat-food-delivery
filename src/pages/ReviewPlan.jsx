@@ -115,7 +115,13 @@ const ReviewPlan = () => {
      const savedCart = localStorage.getItem('lastOrder');
      if (!savedCart) return;
 
-  const cart = JSON.parse(savedCart);
+  let cart;
+  try {
+    cart = JSON.parse(savedCart);
+  } catch (e) {
+    console.error('Error loading saved plan:', e);
+    return;
+  }
 
   // Load meats: map names to indices
   const meatIndices = cart.meats?.map(item => 

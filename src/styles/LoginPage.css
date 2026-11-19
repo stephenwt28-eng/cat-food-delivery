@@ -1,0 +1,15 @@
+.login-register-btn {
+  padding: 10px 20px;
+  background: white;
+  color: #f25e28;
+  border: 2px solid #f25e28;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-register-btn:hover {
+  background: linear-gradient(90deg, #f25e28, #ff8d5d);
+  color: white;
+}

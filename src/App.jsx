@@ -6,7 +6,7 @@ import LandingPage from './components/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import LoggedInLandingPage from './pages/LoggedInLandingPage';
-import ProfilePage from '/src/pages/ProfilePage.jsx';
+import ProfilePage from './pages/ProfilePage';
 import FirstOrder from './pages/FirstOrder';
 import Checkout from './pages/Checkout';
 import OrderConfirm from './pages/OrderConfirm';

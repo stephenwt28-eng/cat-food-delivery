@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import catEyeShow from '../assets/cat_eye_password_show.png';
 import catEyeHide from '../assets/cat_eye_password_hide.png';
+import '../styles/LoginPage.css';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -9,7 +10,7 @@ const LoginPage = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [registerHovered, setRegisterHovered] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -69,16 +70,19 @@ const LoginPage = () => {
     const expectedDigits = phoneDigits[country] || 10;
     const digitsOnly = phone.replace(/\D/g, '');
     if (digitsOnly.length !== expectedDigits && digitsOnly.length > 0) {
-      alert(`Phone number for ${country} must be exactly ${expectedDigits} digits. You entered ${digitsOnly.length}.`);
+      setErrors((prev) => ({ ...prev, phone: `Phone number for ${country} must be exactly ${expectedDigits} digits. You entered ${digitsOnly.length}.` }));
+    } else {
+      setErrors((prev) => ({ ...prev, phone: '' }));
     }
   };
 
   const handleLogin = (e) => {
   e.preventDefault();
   if (!isFormValid) {
-    alert('Please fill out either (Email + Password) or a valid Phone number for your country.');
+    setErrors((prev) => ({ ...prev, form: 'Please fill out either (Email + Password) or a valid Phone number for your country.' }));
     return;
   }
+  setErrors({});
   localStorage.setItem('isLoggedIn', 'true');
   localStorage.setItem('loginEmail', email);
   localStorage.setItem('loginPhone', phone);
@@ -191,7 +195,7 @@ const LoginPage = () => {
                 type="tel"
                 placeholder="Phone number"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => { setPhone(e.target.value); setErrors((prev) => ({ ...prev, phone: '' })); }}
                 onBlur={validatePhone}
                 style={{
                   flex: '1 1 140px',
@@ -203,6 +207,11 @@ const LoginPage = () => {
                 }}
               />
             </div>
+            {errors.phone && (
+              <span style={{ color: '#ff0000', fontSize: '14px', marginTop: '5px', display: 'block' }}>
+                {errors.phone}
+              </span>
+            )}
           </div>
 
           {/* OR Separator */}
@@ -304,6 +313,11 @@ const LoginPage = () => {
           >
             Log in
           </button>
+          {errors.form && (
+            <span style={{ color: '#ff0000', fontSize: '14px', marginBottom: '10px', display: 'block', textAlign: 'center' }}>
+              {errors.form}
+            </span>
+          )}
 
           {/* Forgot Password Link */}
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -322,20 +336,7 @@ const LoginPage = () => {
           <div style={{ textAlign: 'center' }}>
             <p style={{ marginBottom: '10px' }}>Don't have an account? Register now!</p>
             <Link to="/signup">
-              <button
-                onMouseEnter={() => setRegisterHovered(true)}
-                onMouseLeave={() => setRegisterHovered(false)}
-                style={{
-                  padding: '10px 20px',
-                  background: registerHovered ? 'linear-gradient(90deg, #f25e28, #ff8d5d)' : 'white',
-                  color: registerHovered ? 'white' : '#f25e28',
-                  border: '2px solid #f25e28',
-                  borderRadius: '5px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                }}
-              >
+              <button className="login-register-btn">
                 Register
               </button>
             </Link>

@@ -40,7 +40,11 @@ useEffect(() => {
   useEffect(() => {
     const saved = localStorage.getItem('cart');
     if (saved) {
-      setCustomizations(JSON.parse(saved));
+      try {
+        setCustomizations(JSON.parse(saved));
+      } catch (e) {
+        console.error('Error loading cart:', e);
+      }
     }
   }, []);
 
